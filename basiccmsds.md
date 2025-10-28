@@ -116,7 +116,7 @@
   - **Descrição**: Exibe os logs do contêiner BuildKit ativo, útil para depuração de builds.
   - **Partes**:
     - `docker`: Executável principal do Docker.
-    - `logs`: Subcomando para recuperar logs.
+    - `logs`: Subcomando (subcomando para recuperar logs).
     - `$(...)`: Subshell que executa um comando interno e passa seu resultado.
     - `docker ps`: Lista contêineres em execução.
     - `-q`: Retorna apenas os IDs dos contêineres.
@@ -241,6 +241,35 @@
     - `docker`: Executável principal.
     - `volume rm`: Remove volume.
     - `<volume-id>`: ID do volume.
+
+- **`docker-compose down -v`**
+  - **Descrição**: Para e remove contêineres, redes e volumes definidos no `docker-compose.yml`.
+  - **Partes**:
+    - `docker-compose`: Ferramenta para definir e rodar aplicações multi-contêiner.
+    - `down`: Subcomando para desmontar a aplicação.
+    - `-v`: Remove volumes anônimos associados aos serviços.
+
+- **`docker-compose up -d`**
+  - **Descrição**: Inicia os serviços definidos no `docker-compose.yml` em modo detached (em segundo plano).
+  - **Partes**:
+    - `docker-compose`: Ferramenta para orquestração.
+    - `up`: Subcomando para iniciar os serviços.
+    - `-d`: Executa em modo detached.
+
+- **`docker-compose up -d --build`**
+  - **Descrição**: Reconstrói as imagens (se necessário) e inicia os serviços em modo detached.
+  - **Partes**:
+    - `docker-compose`: Ferramenta para orquestração.
+    - `up`: Inicia os serviços.
+    - `-d`: Modo detached.
+    - `--build`: Força a reconstrução das imagens antes de iniciar.
+
+- **`docker-compose up --help`**
+  - **Descrição**: Exibe a ajuda completa do comando `up` do Docker Compose, com todas as opções disponíveis.
+  - **Partes**:
+    - `docker-compose`: Ferramenta principal.
+    - `up`: Subcomando para iniciar serviços.
+    - `--help`: Mostra documentação detalhada.
 
 - **`exit` (dentro do contêiner)**
   - **Descrição**: Sai do shell interativo do contêiner.
