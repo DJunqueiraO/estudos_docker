@@ -1,0 +1,6 @@
+node_modules
+basiccmsds.md
+Dockerfile
+.dockerignore
+.git
+.gitignore
