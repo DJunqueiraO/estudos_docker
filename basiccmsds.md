@@ -171,38 +171,38 @@
     - `--name <nome>`: Define um nome personalizado para o contêiner.
     - `<imagem>`: Nome da imagem usada para criar o contêiner.
 
-- **`docker run -v .:/app:ro -v /app/node_modules -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
-  - **Descrição**: Executa um contêiner com volume read-only, volume anônimo para `node_modules`, mapeando portas e nomeando o contêiner.
+- **`docker run -v <host-path>:<container-path>:<mode> -v <container-path> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
+  - **Descrição**: Executa um contêiner com volume read-only, volume anônimo para diretório específico, mapeando portas e nomeando o contêiner.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Subcomando para criar e iniciar um contêiner.
-    - `-v .:/app:ro`: Monta o diretório atual do host como `/app` em modo somente leitura.
-    - `-v /app/node_modules`: Cria um volume anônimo para o diretório `node_modules`.
+    - `-v <host-path>:<container-path>:<mode>`: Monta um caminho do host no contêiner com modo (ex: `ro` para somente leitura).
+    - `-v <container-path>`: Cria um volume anônimo para o caminho no contêiner.
     - `-p <porta-host>:<porta-contêiner>`: Mapeia porta do host para o contêiner.
     - `-d`: Executa em modo detached.
     - `--name <nome>`: Define o nome do contêiner.
     - `<imagem>`: Nome da imagem base.
 
-- **`docker run -v .:/app:ro -v /app/node_modules --env <VAR>=<valor> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
+- **`docker run -v <host-path>:<container-path>:<mode> -v <container-path> --env <VAR>=<valor> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
   - **Descrição**: Executa um contêiner com volume read-only, volume anônimo, variável de ambiente individual, mapeando portas.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Cria e inicia o contêiner.
-    - `-v .:/app:ro`: Monta código do host como somente leitura.
-    - `-v /app/node_modules`: Volume anônimo para evitar conflito com `node_modules` do host.
+    - `-v <host-path>:<container-path>:<mode>`: Monta caminho com modo.
+    - `-v <container-path>`: Volume anônimo.
     - `--env <VAR>=<valor>`: Define uma variável de ambiente.
     - `-p <porta-host>:<porta-contêiner>`: Mapeia porta do host para o contêiner.
     - `-d`: Modo detached.
     - `--name <nome>`: Nome do contêiner.
     - `<imagem>`: Imagem base.
 
-- **`docker run -v .:/app:ro -v /app/node_modules --env-file <arquivo> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
-  - **Descrição**: Executa um contêiner carregando variáveis de ambiente de um arquivo.
+- **`docker run -v <host-path>:<container-path>:<mode> -v <container-path> --env-file <arquivo> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
+  - **Descrição**: Executa um contêiner carregando variáveis de ambiente de um arquivo, com volumes e mapeamento de portas.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Cria e inicia o contêiner.
-    - `-v .:/app:ro`: Monta diretório atual como read-only.
-    - `-v /app/node_modules`: Volume anônimo para `node_modules`.
+    - `-v <host-path>:<container-path>:<mode>`: Monta caminho com modo.
+    - `-v <container-path>`: Volume anônimo.
     - `--env-file <arquivo>`: Carrega variáveis de ambiente do arquivo especificado.
     - `-p <porta-host>:<porta-contêiner>`: Mapeia porta.
     - `-d`: Detached.
@@ -251,20 +251,17 @@
   - **Descrição**: Lista arquivos e pastas no diretório atual.
   - **Partes**:
     - `ls`: Comando Linux padrão.
-    - **Exemplo**: `ls -la` → lista com detalhes.
 
 - **`printenv` (dentro do contêiner)**
   - **Descrição**: Exibe todas as variáveis de ambiente no contêiner.
   - **Partes**:
     - `printenv`: Comando Linux para listar variáveis.
-    - **Exemplo**: `printenv | grep PORT` → filtra `PORT`.
 
 - **`touch <arquivo>` (dentro do contêiner)**
   - **Descrição**: Cria um arquivo vazio (só funciona se o volume não for `:ro`).
   - **Partes**:
     - `touch`: Cria ou atualiza timestamp.
     - `<arquivo>`: Nome do arquivo a ser criado.
-    - **Erro se `:ro`**: `Read-only file system`.
 
 - **`wsl --shutdown`**
   - **Descrição**: Encerra todas as distribuições do WSL 2, útil para resolver erros no Docker Desktop no Windows.
