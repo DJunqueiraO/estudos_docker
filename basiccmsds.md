@@ -4,7 +4,7 @@
   - **Descrição**: Exibe o conteúdo de um arquivo.
   - **Partes**:
     - `cat`: Comando Linux para mostrar conteúdo.
-    - `<arquivo>`: Ex: `cat index.js`.
+    - `<arquivo>`: Nome do arquivo a ser exibido.
 
 - **`DOCKER_BUILDKIT=0 docker build -t <nome>:<tag> .`**
   - **Descrição**: Constrói uma imagem sem usar o BuildKit, revertendo para o builder clássico.
@@ -20,7 +20,7 @@
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `build`: Subcomando para construir uma imagem a partir de um Dockerfile.
-    - `-t <nome>:<tag>`: Define o nome e a tag da imagem (ex.: `minha-imagem:v1`). O `-t` significa "tag".
+    - `-t <nome>:<tag>`: Define o nome e a tag da imagem.
     - `.`: Especifica o diretório atual como o contexto de build, onde o Dockerfile deve estar presente.
 
 - **`docker builder prune -a -f`**
@@ -36,8 +36,8 @@
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `buildx build`: Subcomando do Buildx para realizar builds avançados, suportando múltiplas plataformas.
-    - `-t <nome>:<tag>`: Define o nome e a tag da imagem, como no comando `build`.
-    - `--load`: Instrui o Buildx a carregar a imagem resultante no armazenamento local do Docker (em vez de apenas exportar).
+    - `-t <nome>:<tag>`: Define o nome e a tag da imagem.
+    - `--load`: Instrui o Buildx a carregar a imagem resultante no armazenamento local do Docker.
     - `.`: Especifica o diretório atual como contexto de build, onde o Dockerfile está localizado.
 
 - **`docker buildx create --name <nome> --driver docker-container --use`**
@@ -45,7 +45,7 @@
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `buildx create`: Subcomando para criar um novo builder.
-    - `--name <nome>`: Define um nome para o builder (ex.: `meu-builder`).
+    - `--name <nome>`: Define um nome para o builder.
     - `--driver docker-container`: Especifica o tipo de driver, que usa um contêiner Docker para builds.
     - `--use`: Define o builder recém-criado como o ativo para builds futuros.
 
@@ -72,11 +72,11 @@
     - `bash`: O comando a ser executado, iniciando um shell interativo.
 
 - **`docker exec <container> cat /app/<arquivo>`**
-  - **Descrição**: Mostra conteúdo de um arquivo do contêiner **sem entrar**.
+  - **Descrição**: Mostra conteúdo de um arquivo do contêiner sem entrar.
   - **Partes**:
     - `docker exec`: Executa comando no contêiner.
-    - `<container>`: Nome ou ID.
-    - `cat /app/<arquivo>`: Exibe arquivo.
+    - `<container>`: Nome ou ID do contêiner.
+    - `cat /app/<arquivo>`: Exibe o arquivo especificado.
 
 - **`docker image ls`**
   - **Descrição**: Lista todas as imagens Docker disponíveis localmente no sistema.
@@ -96,7 +96,7 @@
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `image rm`: Subcomando para remover imagens.
-    - `<image-id>`: Identificador único da imagem a ser removida (pode ser obtido com `docker image ls`).
+    - `<image-id>`: Identificador único da imagem a ser removida.
     - **Nota**: Use `-f` (force) para forçar a remoção, mesmo se a imagem estiver em uso.
 
 - **`docker info`**
@@ -134,7 +134,7 @@
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `pull`: Subcomando para baixar imagens de um repositório remoto.
-    - `<nome>:<tag>`: Nome da imagem e sua tag específica (ex.: `nginx:latest`).
+    - `<nome>:<tag>`: Nome da imagem e sua tag específica.
 
 - **`docker rm <container-id>`**
   - **Descrição**: Remove um contêiner parado.
@@ -144,77 +144,77 @@
     - `<container-id>`: Identificador único do contêiner a ser removido.
     - **Nota**: Use `-f` (force) para remover um contêiner mesmo se estiver em execução.
 
-- **`docker rm node-app -f`**
+- **`docker rm <container> -f`**
   - **Descrição**: Remove um contêiner com força, mesmo se estiver em execução.
   - **Partes**:
     - `docker`: Executável principal.
     - `rm`: Remove contêiner.
-    - `node-app`: Nome do contêiner.
+    - `<container>`: Nome ou ID do contêiner.
     - `-f`: Força parada e remoção.
 
-- **`docker rm node-app -fv`**
+- **`docker rm <container> -fv`**
   - **Descrição**: Remove um contêiner com força e remove volumes associados.
   - **Partes**:
     - `docker`: Executável principal.
     - `rm`: Remove contêiner.
     - `-f`: Força parada.
     - `-v`: Remove volumes anônimos associados.
-    - `node-app`: Nome do contêiner.
+    - `<container>`: Nome ou ID do contêiner.
 
 - **`docker run -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
   - **Descrição**: Executa um contêiner a partir de uma imagem, mapeando portas, rodando em segundo plano e nomeando o contêiner.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Subcomando para criar e iniciar um novo contêiner a partir de uma imagem.
-    - `-p <porta-host>:<porta-contêiner>`: Mapeia uma porta do host para uma porta do contêiner (ex.: `8080:80`).
+    - `-p <porta-host>:<porta-contêiner>`: Mapeia uma porta do host para uma porta do contêiner.
     - `-d`: Executa o contêiner em modo detached (em segundo plano, sem ocupar o terminal).
-    - `--name <nome>`: Define um nome personalizado para o contêiner (ex.: `meu-app`).
-    - `<imagem>`: Nome da imagem usada para criar o contêiner (ex.: `nginx`).
+    - `--name <nome>`: Define um nome personalizado para o contêiner.
+    - `<imagem>`: Nome da imagem usada para criar o contêiner.
 
-- **`docker run -v .:/app:ro -v /app/node_modules -p 3000:3000 -d --name node-app node-app-image`**
-  - **Descrição**: Executa um contêiner a partir da imagem `node-app-image`, configurando volumes, mapeando portas, rodando em segundo plano e nomeando o contêiner.
+- **`docker run -v .:/app:ro -v /app/node_modules -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
+  - **Descrição**: Executa um contêiner com volume read-only, volume anônimo para `node_modules`, mapeando portas e nomeando o contêiner.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Subcomando para criar e iniciar um contêiner.
-    - `-v .:/app:ro`: Monta o diretório atual do host (`.`) no caminho `/app` do contêiner como somente leitura (`ro`).
-    - `-v /app/node_modules`: Cria um volume anônimo para o diretório `/app/node_modules` no contêiner, evitando que as dependências Node.js do host sejam usadas.
-    - `-p 3000:3000`: Mapeia a porta 3000 do host para a porta 3000 do contêiner.
-    - `-d`: Executa o contêiner em modo detached (em segundo plano).
-    - `--name node-app`: Define o nome do contêiner como `node-app`.
-    - `node-app-image`: Nome da imagem usada para criar o contêiner.
+    - `-v .:/app:ro`: Monta o diretório atual do host como `/app` em modo somente leitura.
+    - `-v /app/node_modules`: Cria um volume anônimo para o diretório `node_modules`.
+    - `-p <porta-host>:<porta-contêiner>`: Mapeia porta do host para o contêiner.
+    - `-d`: Executa em modo detached.
+    - `--name <nome>`: Define o nome do contêiner.
+    - `<imagem>`: Nome da imagem base.
 
-- **`docker run -v .:/app:ro -v /app/node_modules --env PORT=4000 -p 3000:4000 -d --name node-app node-app-image`**
-  - **Descrição**: Executa um contêiner com volume read-only, volume anônimo para `node_modules`, define variável `PORT` e mapeia portas.
+- **`docker run -v .:/app:ro -v /app/node_modules --env <VAR>=<valor> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
+  - **Descrição**: Executa um contêiner com volume read-only, volume anônimo, variável de ambiente individual, mapeando portas.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Cria e inicia o contêiner.
     - `-v .:/app:ro`: Monta código do host como somente leitura.
-    - `-v /app/node_modules`: Cria volume anônimo para evitar conflito com `node_modules` do host.
-    - `--env PORT=4000`: Define variável de ambiente `PORT=4000`.
-    - `-p 3000:4000`: Mapeia porta 3000 (host) → 4000 (contêiner).
+    - `-v /app/node_modules`: Volume anônimo para evitar conflito com `node_modules` do host.
+    - `--env <VAR>=<valor>`: Define uma variável de ambiente.
+    - `-p <porta-host>:<porta-contêiner>`: Mapeia porta do host para o contêiner.
     - `-d`: Modo detached.
-    - `--name node-app`: Nome do contêiner.
-    - `node-app-image`: Imagem base.
+    - `--name <nome>`: Nome do contêiner.
+    - `<imagem>`: Imagem base.
 
-- **`docker run -v .:/app:ro -v /app/node_modules --env-file ./.env -p 3000:4000 -d --name node-app node-app-image`**
-  - **Descrição**: Executa um contêiner carregando variáveis de ambiente de um arquivo `.env`.
+- **`docker run -v .:/app:ro -v /app/node_modules --env-file <arquivo> -p <porta-host>:<porta-contêiner> -d --name <nome> <imagem>`**
+  - **Descrição**: Executa um contêiner carregando variáveis de ambiente de um arquivo.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `run`: Cria e inicia o contêiner.
     - `-v .:/app:ro`: Monta diretório atual como read-only.
     - `-v /app/node_modules`: Volume anônimo para `node_modules`.
-    - `--env-file ./.env`: Carrega todas as variáveis do arquivo `.env`.
-    - `-p 3000:4000`: Mapeia porta.
+    - `--env-file <arquivo>`: Carrega variáveis de ambiente do arquivo especificado.
+    - `-p <porta-host>:<porta-contêiner>`: Mapeia porta.
     - `-d`: Detached.
-    - `--name node-app`: Nome do contêiner.
-    - `node-app-image`: Imagem.
+    - `--name <nome>`: Nome do contêiner.
+    - `<imagem>`: Imagem base.
 
 - **`docker stop <container-id>`**
   - **Descrição**: Para a execução de um contêiner em execução.
   - **Partes**:
     - `docker`: Executável principal do Docker.
     - `stop`: Subcomando para parar um contêiner, enviando um sinal para encerrar o processo.
-    - `<container-id>`: Identificador único do contêiner (obtido com `docker ps`).
+    - `<container-id>`: Identificador único do contêiner.
 
 - **`docker version`**
   - **Descrição**: Exibe a versão do cliente e do servidor Docker instalados.
@@ -240,7 +240,7 @@
   - **Partes**:
     - `docker`: Executável principal.
     - `volume rm`: Remove volume.
-    - `<volume-id>`: ID do volume (ex: `1b667e916680...`).
+    - `<volume-id>`: ID do volume.
 
 - **`exit` (dentro do contêiner)**
   - **Descrição**: Sai do shell interativo do contêiner.
@@ -260,10 +260,10 @@
     - **Exemplo**: `printenv | grep PORT` → filtra `PORT`.
 
 - **`touch <arquivo>` (dentro do contêiner)**
-  - **Descrição**: Cria um arquivo vazio (só funciona se o volume **não for `:ro`**).
+  - **Descrição**: Cria um arquivo vazio (só funciona se o volume não for `:ro`).
   - **Partes**:
     - `touch`: Cria ou atualiza timestamp.
-    - `<arquivo>`: Ex: `touch novo.txt`.
+    - `<arquivo>`: Nome do arquivo a ser criado.
     - **Erro se `:ro`**: `Read-only file system`.
 
 - **`wsl --shutdown`**
