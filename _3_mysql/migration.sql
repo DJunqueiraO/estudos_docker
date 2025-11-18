@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS schools( 
+    id SERIAL PRIMARY KEY, 
+    name VARCHAR(100), 
+    address VARCHAR(100)
+)
