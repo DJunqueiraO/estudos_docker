@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS school ( 
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100), 
+    address VARCHAR(100)
+);
