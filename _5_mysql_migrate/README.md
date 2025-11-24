@@ -39,3 +39,16 @@ docker volume rm $(docker volume ls -q)
 docker build -t my-node-app .
 docker compose up -d --build
 ```
+
+## 🚀 Publicando a imagem para o Hub Docker
+
+```bash
+# 1️⃣ Login no Hub
+docker login
+
+# 2️⃣ Tag da imagem
+docker tag my-node-app:latest $HUB_USER/my-node-app:latest
+
+# 3️⃣ Publicar a imagem
+docker push $HUB_USER/my-node-app:latest
+```
